@@ -5,7 +5,7 @@
   - name: shell
     shell: "tar -xf /opt/apache-tomcat-7.0.92.tar.gz -C  /opt"
   - name: tmelate
-    template: src=files/tomcat-users.xml dest=/root/apache-tomcat-7.0.92/conf
+    template: src=files/tomcat-users.xml dest=/opt/apache-tomcat-7.0.92/conf
   - name: copy template for tomcat service
     template: src=tomcat.service  dest=/etc/systemd/system/tomcat.service
   - name: start service 
