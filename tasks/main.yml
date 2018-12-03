@@ -1,8 +1,14 @@
---- 
+---
 # tasks file for tomcat
-  - get_url: url=https://www-eu.apache.org/dist/tomcat/tomcat-7/v7.0.92/bin/apache-tomcat-7.0.92.tar.gz dest=/home/satish
-  - shell: "tar -xf /home/satish/apache-tomcat-7.0.92.tar.gz -C  /home/satish/"
-  - template: src=files/tomcat-users.xml dest=/home/satish/apache-tomcat-7.0.92/conf
-  - shell: "chown -R satish:satish /home/satish/apache-tomcat-7.0.92"
-  - shell: "sh /home/satish/apache-tomcat-7.0.92/bin/startup.sh"
+  - name: download tomcat 
+    get_url: url=https://www-eu.apache.org/dist/tomcat/tomcat-7/v7.0.92/bin/apache-tomcat-7.0.92.tar.gz dest=/opt
+  - name: shell
+    shell: "tar -xf /opt/apache-tomcat-7.0.92.tar.gz -C  /opt"
+  - name: tmelate
+    template: src=files/tomcat-users.xml dest=/root/apache-tomcat-7.0.92/conf
+  - name: copy template for tomcat service
+    template: src=tomcat.service  dest=/etc/systemd/system/tomcat.service
+  - name: start service 
+    service: name=tomcat state=started
+
 
